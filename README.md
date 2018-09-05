@@ -1,2 +1,5 @@
-# helloworld
-just another repository
+小技巧
+1、重装node.js后，npm和node版本不一致时，如何修改npm版本
+  a.卸载node.js
+  b.删除 C:\Users\Administrator\AppData\Roaming 目录下的 npm 和npm-cache文件夹
+  c.重装node.js
