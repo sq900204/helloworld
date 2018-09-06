@@ -6,8 +6,33 @@
 3、vue init webpack my-project
 4、npm install
 5、npm run dev
+代理解决跨域问题
+  proxyTable: {
+      '/api': {
+        target: 'http://gulusit.cmgame.com',// 跨域的接口地址
+        // target: 'http://192.168.129.144',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '' // 需要rewrite重写的,
+        }
+      }
+    },
+  在用到接口的地方用/api代替 http://gulusit.cmgame.com 即可
+
+路由配置
+  按需加载
+    es6模式 （推荐）
+      const login = (resolve) => { return import('@/components/login/login') }
+   webpack加载方式
+     const login = (resolve) => {
+      return require.ensure([], () => resolve(require('@/components/login/login')))
+     }
+ 
+ 
+分环境打包
  分环境打包配置
  安装 cross-env:  npm install cross-env –-save-dev 
+ 安装 babel-polyfill： npm install --save-dev babel-polyfill
  a.修改packjson.js配置
     "build:test": "cross-env NODE_ENV=production env_config=test node build/build.js",
     "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js"
