@@ -6,6 +6,17 @@
 3、vue init webpack my-project
 4、npm install
 5、npm run dev
+在vue项目中使用sass
+  a.安装  npm安装会出现问题，用淘宝镜像cnpm安装
+      cnpm install node-sass --save-dev
+      cnpm install sass-loader --save-dev
+  b.在webpack.base.config.js的loader中添加
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
+      },
+  c.使用
+     <style lang="scss" scoped="" type="text/css"></style>
 代理解决跨域问题
   proxyTable: {
       '/api': {
