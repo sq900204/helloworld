@@ -7,10 +7,11 @@
 4、npm install
 5、npm run dev
  分环境打包配置
+ 安装 cross-env:  npm install cross-env –-save-dev 
  a.修改packjson.js配置
     "build:test": "cross-env NODE_ENV=production env_config=test node build/build.js",
     "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js"
- b.在config文件夹下面添加dev.env.js和prod.env.js
+ b.在config文件夹下面修改dev.env.js和prod.env.js
     dev.env.js  
         'use strict'
         const merge = require('webpack-merge')
@@ -26,6 +27,15 @@
         NODE_ENV: '"production"',
         ENV_CONFIG: '"prod"'
       }
+   test.env.js
+      'use strict'
+      const merge = require('webpack-merge')
+      const devEnv = require('./dev.env')
+
+      module.exports = merge(devEnv, {
+        NODE_ENV: '"testing"',
+        ENV_CONFIG: '"test"'
+      })
    index.js
     build中添加
     build{
@@ -33,10 +43,22 @@
         prodEnv: require('./prod.env'),
     }
 
- c.在build文件夹下面添加 webpack.dev.conf.js、webpack.prod.conf.js两个文件
+ c.在build文件夹下面添加 webpack.text.conf.js
     修改build.js文件
-       const webpackConfig_prod = require('./webpack.prod.conf')
-       const webpackConfig_test = require('./webpack.test.conf')
+       注释
+         process.env.NODE_ENV = 'production'
+         const spinner = ora('building for production...')
+       添加
+        const webpackConfig_prod = require('./webpack.prod.conf')
+        const webpackConfig_test = require('./webpack.test.conf')
+        let webpackConfig
+        let spinner
+
+        if (process.env.env_config === 'test') {
+          spinner = ora('building for test...')
+        } else {
+          spinner = ora('building for prod...')
+        }
        引用
        rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
           if (err) throw err
@@ -46,7 +68,13 @@
             webpackConfig = webpackConfig_prod
           }
        }
-       
-       
+      webpack.base.conf.js
+        修改
+        entry: {
+          app: [ 'babel-polyfill', './src/main.js' ]
+        },
+       webpack.prod.conf.js
+       修改
+       const env = config.build[process.env.env_config + 'Env']
   
  
