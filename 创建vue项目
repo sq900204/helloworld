@@ -1,3 +1,52 @@
 1、安装vue
   npm install vue
-2、
+  npm install vue -g （全局安装vue）
+2、安装vue-cli
+  npm install -g vue-cli
+3、vue init webpack my-project
+4、npm install
+5、npm run dev
+ 分环境打包配置
+ a.修改packjson.js配置
+    "build:test": "cross-env NODE_ENV=production env_config=test node build/build.js",
+    "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js"
+ b.在config文件夹下面添加dev.env.js和prod.env.js
+    dev.env.js  
+        'use strict'
+        const merge = require('webpack-merge')
+        const prodEnv = require('./prod.env')
+
+        module.exports = merge(prodEnv, {
+          NODE_ENV: '"development"',
+          ENV_CONFIG: '"development"'
+        })
+   pro.env.js
+      'use strict'
+      module.exports = {
+        NODE_ENV: '"production"',
+        ENV_CONFIG: '"prod"'
+      }
+   index.js
+    build中添加
+    build{
+        testEnv: require('./test.env'),
+        prodEnv: require('./prod.env'),
+    }
+
+ c.在build文件夹下面添加 webpack.dev.conf.js、webpack.prod.conf.js两个文件
+    修改build.js文件
+       const webpackConfig_prod = require('./webpack.prod.conf')
+       const webpackConfig_test = require('./webpack.test.conf')
+       引用
+       rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
+          if (err) throw err
+          if (process.env.env_config === 'test') {
+            webpackConfig = webpackConfig_test
+          } else {
+            webpackConfig = webpackConfig_prod
+          }
+       }
+       
+       
+  
+ 
