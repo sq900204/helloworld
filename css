@@ -6,3 +6,20 @@
     -webkit-line-clamp:n;
     overflow:hidden;
    }
+   移动端顺畅滚动
+   {
+      -webkit-overflow-scrolling:touch;
+   }
+   移动端禁止用户长按文字选择功能
+   .unselect {
+     -webkit-touch-callout:none;
+     -webkit-user-select:none;
+     -khtml-user-select:none;
+     -moz-user-select:none;
+     -ms-user-select:none;
+     user-select:none
+   }
+   改变光标颜色
+   {
+     caret-color:#ff0
+   }
