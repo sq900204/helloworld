@@ -1,1 +1,8 @@
-1、http://www.imooc.com/article/51405?from=timeline&isappinstalled=0#10006-weixin-1-52626-6b3bffd01fdde4900130bc5a2751b6d1
+1、http://www.imooc.com/article/51405?from=timeline&isappinstalled=0#10006-weixin-1-52626-6b3bffd01fdde4900130bc5a2751b6d1 
+   多行省略号：
+   {
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:n;
+    overflow:hidden;
+   }
