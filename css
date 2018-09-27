@@ -41,3 +41,11 @@
       transoform:rotate(45deg) scaleX(2);
       background:#e0e0e0;
     }
+   平滑滚动
+   {
+     -webkit-overflow-scrolling:touch
+   }
+   点击去除高光
+   *{
+    -webkit-tap-highlight-color:transparent
+   }
