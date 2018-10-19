@@ -1,0 +1,4 @@
+定位
+1、float元素，其他元素会环绕着float元素，
+   所以可以做出某些文字环绕另外的文字的 效果   
+2、absolute和fixed 定位，如果不设置top、left、bottom、right位置时，该元素会浮动在其原先在文档流中的上方（z-index）;
